@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saudi Competitive Geologists</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Reem+Kufi:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --bg-dark: #0f172a;
+            --accent: #00f2fe; 
+            --accent-glow: rgba(0, 242, 254, 0.4);
+            --easy: #00e676; 
+            --medium: #ff9100; 
+            --hard: #ff1744; 
+            --challenge: #d500f9; 
+            --glass-bg: rgba(15, 23, 42, 0.55);
+            --glass-border: rgba(255, 255, 255, 0.15);
+        }
+
+        body {
+            font-family: 'Cairo', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            margin: 0; 
+            color: #f8fafc;
+            background: linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.7)), 
+                        url('https://img.magnific.com/free-photo/magical-mystical-landscape-wallpaper-purple-tones_23-2150293331.jpg?semt=ais_hybrid&w=740&q=80');
+            background-size: cover;
+            background-attachment: fixed; 
+            background-position: center;
+            min-height: 100vh; 
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        .container { max-width: 1100px; margin: auto; padding: 40px 20px; }
+        
+        .glass { 
+            background: var(--glass-bg); 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border); 
+            border-radius: 24px; 
+            padding: 30px; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        .emoji {
+            font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif !important;
+            display: inline-block;
+            line-height: 1;
+            vertical-align: middle;
+            -webkit-text-fill-color: initial !important; 
+            text-shadow: none !important;
+            -webkit-text-stroke: 0px transparent !important;
+        }
+
+        .main-title {
+            font-family: 'Reem Kufi', sans-serif;
+            font-weight: 900; 
+            font-size: 3.8rem;
+            margin-bottom: 45px;
+            color: #e0f7fa; 
+            -webkit-text-stroke: 3px #000000; 
+            text-shadow: 
+                0 0 7px #00f2fe,
+                0 0 15px #00f2fe,
+                0 0 30px #00f2fe,
+                0 0 60px #00c8ff,
+                0 0 100px #0077ff;
+            letter-spacing: 1px;
+            display: inline-block;
+        }
+
+        .rooms-flex-container { display: flex; flex-direction: column; gap: 30px; margin-top: 40px; }
+        .main-rooms-row { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .secret-room-row { display: flex; justify-content: center; margin-top: 10px; }
+
+        .room-btn { 
+            background: rgba(255, 255, 255, 0.08); 
+            border: 1px solid var(--glass-border); 
+            color: #fff; 
+            width: 100px;
+            height: 100px;
+            border-radius: 50%; 
+            font-size: 28px; 
+            font-weight: 700;
+            cursor: pointer; 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .room-btn:hover { 
+            background: var(--accent); 
+            color: #020617; 
+            transform: translateY(-8px) scale(1.05); 
+            border-color: var(--accent);
+            box-shadow: 0 15px 30px var(--accent-glow);
+        }
+        
+        .room-btn.secret {
+            border-color: var(--challenge);
+            color: var(--challenge);
+            background: rgba(213, 0, 249, 0.15);
+            animation: pulseGlow 2s infinite alternate;
+        }
+        .room-btn.secret:hover {
+            background: var(--challenge);
+            color: #fff;
+            border-color: var(--challenge);
+            box-shadow: 0 15px 30px rgba(213, 0, 249, 0.5);
+        }
+        @keyframes pulseGlow {
+            from { box-shadow: 0 0 10px rgba(213, 0, 249, 0.2); }
+            to { box-shadow: 0 0 25px rgba(213, 0, 249, 0.6); transform: scale(1.03); }
+        }
+
+        .board-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 30px; }
+        .category-card { background: rgba(15, 23, 42, 0.4); border: 1px solid var(--glass-border); border-radius: 20px; padding: 20px; }
+        .category-card h3 { margin-top: 0; font-size: 1.4rem; font-weight: 700; opacity: 0.95; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+
+        .lvl-label { display: block; margin-bottom: 10px; font-weight: 600; opacity: 0.8; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .cards-row { display: flex; gap: 12px; justify-content: center; margin-bottom: 20px; }
+        
+        .card { 
+            width: 90px; 
+            height: 55px; 
+            border-radius: 14px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-weight: 900; 
+            font-size: 1.2rem;
+            cursor: pointer; 
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        .card:hover { transform: translateY(-4px); filter: brightness(1.2); box-shadow: 0 12px 20px rgba(0,0,0,0.4); }
+        .card.easy { background: linear-gradient(135deg, #00c853, #69f0ae); color: #003311; } 
+        .card.medium { background: linear-gradient(135deg, #ff6d00, #ffd740); color: #3e2723; } 
+        .card.hard { background: linear-gradient(135deg, #d50000, #ff8a80); color: #fff; }
+        .card.used { background: #334155 !important; color: rgba(255,255,255,0.3) !important; border-color: transparent; opacity: 0.4; cursor: not-allowed; transform: none !important; box-shadow: none; }
+        
+        .q-img { 
+            width: 100%; max-width: 450px; height: 280px; object-fit: cover; 
+            border-radius: 20px; border: 2px solid var(--glass-border); 
+            margin: 25px auto; display: none; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .btn-action { 
+            padding: 14px 35px; border-radius: 16px; border: none; font-weight: 700; font-size: 1.05rem;
+            cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        .btn-action:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(0,0,0,0.4); filter: brightness(1.15); }
+        
+        .btn-team-choice {
+            background: rgba(15, 23, 42, 0.7);
+            color: #fff;
+            border: 2px solid var(--accent);
+            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.15);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .btn-team-choice:hover {
+            background: #00f2fe;
+            color: #020617;
+            border-color: #ffffff;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 
+                0 0 10px #00f2fe,
+                0 0 25px #00f2fe,
+                0 0 50px rgba(0, 242, 254, 0.6);
+        }
+
+        .screen { display: none; } .active { display: block; animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        input { 
+            padding: 16px; border-radius: 14px; border: 1px solid var(--glass-border); 
+            margin: 12px 0; width: 85%; font-family: 'Cairo'; font-size: 1rem;
+            background: rgba(15, 23, 42, 0.6); color: white; transition: 0.3s;
+        }
+        input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 15px rgba(0, 242, 254, 0.3); }
+        
+        .timer-box { margin: 20px auto; padding: 15px; max-width: 280px; border-radius: 16px; background: rgba(0,0,0,0.4); border: 1px solid var(--glass-border); }
+        .timer-display { font-size: 2.5rem; font-weight: 900; color: var(--accent); margin-bottom: 12px; font-variant-numeric: tabular-nums; text-shadow: 0 0 10px rgba(0, 242, 254, 0.4); }
+        .timer-display.danger { color: var(--hard); animation: pulse 0.4s infinite alternate; text-shadow: 0 0 25px var(--hard); }
+        @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.05); } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="screen-rooms" class="screen active">
+        <h1 class="main-title">Saudi Competitive Geologists <span class="emoji">🌋</span></h1>
+        <div class="rooms-flex-container">
+            <div class="main-rooms-row" id="main-rooms-list"></div>
+            <div class="secret-room-row" id="secret-room-list"></div>
+        </div>
+    </div>
+
+    <div id="screen-setup" class="screen">
+        <div class="glass" style="max-width: 480px; margin: auto;">
+            <h2 id="setup-title" style="font-weight: 700;"></h2>
+            <input type="text" id="team1-name" placeholder="اسم الفريق الأول">
+            <input type="text" id="team2-name" placeholder="اسم الفريق الثاني">
+            <br><br>
+            <button class="btn-action" style="background: linear-gradient(135deg, var(--accent), #00d2ff); color: #020617;" onclick="initGame()">ابدأ التحدي <span class="emoji">⚔️</span></button>
+        </div>
+    </div>
+
+    <div id="screen-board" class="screen">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; gap: 15px;">
+            <div class="glass" id="score1" style="flex: 1; padding: 15px 20px;"></div>
+            <h2 id="board-title" style="color:var(--accent); font-weight: 900; font-size: 2rem; margin: 0; flex: 1.5;"></h2>
+            <div class="glass" id="score2" style="flex: 1; padding: 15px 20px;"></div>
+        </div>
+        
+        <div class="board-container">
+            <div class="category-card"><h3><span class="emoji">🌍</span> Rock Spot</h3><div id="geo-board"></div></div>
+            <div class="category-card"><h3><span class="emoji">💎</span> Club Sub</h3><div id="rock-board"></div></div>
+            <div class="category-card" style="border-color: var(--challenge); background: rgba(213, 0, 249, 0.05);">
+                <h3 style="color: var(--challenge);"><span class="emoji">⚡</span> Brain Eruption </h3><div id="petro-board"></div>
+            </div>
+        </div>
+        <button class="btn-action" style="background: linear-gradient(135deg, var(--hard), #ff5252); margin-top: 40px; color:white;" onclick="endGame()"><span class="emoji">🏁</span> إنهاء وإعلان الفائز</button>
+    </div>
+
+    <div id="screen-question" class="screen">
+        <div class="glass" style="max-width: 680px; margin: auto;">
+            <div class="timer-box">
+                <div id="q-timer-display" class="timer-display">--</div>
+                <button id="q-timer-btn" class="btn-action" style="background: rgba(255,255,255,0.08); color: white; border: 1px solid var(--glass-border); padding: 8px 22px; font-size: 0.95rem;" onclick="startQuestionTimer()">تشغيل المؤقت <span class="emoji">⏱️</span></button>
+            </div>
+
+            <h2 id="q-text" style="font-weight: 700; line-height: 1.6; margin: 30px 0;"></h2>
+            <img id="q-img" class="q-img" src="">
+            <div id="q-answer" style="display:none; color: var(--easy); font-size: 2.2rem; font-weight: 900; margin: 25px 0; text-shadow: 0 0 15px rgba(0,230,118,0.4)"></div>
+            
+            <button class="btn-action" style="background: rgba(255,255,255,0.12); color: white; width: 100%; border: 1px solid var(--glass-border);" onclick="document.getElementById('q-answer').style.display='block'">كشف الإجابة</button>
+            
+            <div id="winner-btns" style="display: flex; gap: 15px; justify-content: center; margin-top:25px;"></div>
+            <button class="btn-action" style="background: none; color: #94a3b8; box-shadow: none;" onclick="goBackToBoard()">تراجع</button>
+        </div>
+    </div>
+
+    <div id="screen-result" class="screen">
+        <div class="glass" style="max-width: 480px; margin: auto; border-color: var(--accent);">
+            <h1 id="winner-msg" style="font-size: 2.5rem; color: var(--accent); font-weight: 900;"></h1>
+            <div id="final-points" style="font-size: 1.6rem; margin: 25px 0; line-height: 1.8;"></div>
+            <button class="btn-action" style="background: linear-gradient(135deg, var(--accent), #00d2ff); color:#020617;" onclick="location.reload()">العودة للرئيسية</button>
+        </div>
+    </div>
+</div>
+
+<script>
+const roomsData = {
+    1: {
+        geo: {
+            easy:   [{q: "ما هو المعدن رقم 10 في مقياس موس للصلادة؟", a: "الألماس"}],
+            medium: [{q: "ما هو اسم النسيج الصخري الذي يتميز بوجود بلورات كبيرة الحجم محاطة بأرضية من بلورات دقيقة؟", a: "البورفيري (Porphyritic)", img: "https://sandatlas.org/wp-content/uploads/IMG_5210-rhomb-porphyry.jpg.webp"}],
+            hard:   [{q: " ما المعدن الدال على الـ Greenschist Facies؟", a: "chlorite"}]
+        },
+        rock: {
+            easy:   [{q: "أي سنة تأسس النادي الجيولوجي؟", a: "2023", img: ""}],
+            medium: [{q: "ما هي آخر فعالية أقامها النادي؟", a: "Speaking Centre", img: ""}],
+            hard:   [{q: "كم عدد الملتقيات العلمية التي أقامها النادي؟", a: "3 ملتقيات", img: ""}]
+        },
+        petro: [
+            {q: "معادن", a: "-"},
+            {q: "صخور؟", a: "-"}
+        ]
+    },
+    2: {
+        geo: {
+            easy:   [{q: "ما هو الصخر البركاني المكافئ لصخر الجرانيت؟", a: "الريوليت (Rhyolite)"}],
+            medium: [{q: "ما هو هذا المعدن  ؟", a: "Chromite", img: "https://geophysics.earth.northwestern.edu/NU-Geopaths/MConnell/pictures/imagechromite1.jpg"}],
+            hard:   [{q: "ما الشكل البركاني الناتج عن تبرد الMagma تحت الماء مباشرة؟", a: "pillow lava"}]
+        },
+        rock: {
+            easy:   [{q: "ما اسم الجلسات الأسبوعية التي كان يقيمها النادي لتعلم الإنجليزية؟", a: "Speaking Center", img: ""}],
+            medium: [{q: "ما الفعاليات التي تكررت في الترمين الأول والثاني؟", a: "Students' Symposium", img: ""}],
+            hard:   [{q: "ما أول فعالية أُقيمت في الترم الثاني؟", a: "الأمسية الرمضانية", img: ""}]
+        },
+        petro: [
+            {q: "صخور نارية", a: "-"},
+            {q: "دكاترة", a: "-"}
+        ]
+    },
+    3: { 
+        geo: { 
+            easy:   [{q: "ما هو المعدن الشائع الذي يمتلك صلادة رقم 7 في مقياس موس؟", a: "الكوارتز (Quartz)"}], 
+            medium: [{q: "ما هو هذا المعدن؟", a: "calcite", img: "https://www.stonemania.co.uk/images/stories/articles-photos/calcite.webp"}], 
+            hard:   [{q: "ما هو المصطلح الجيولوجي الذي يعبر عن الترتيب المتوازي للمعادن الورقية في الصخور المتحولة نتيجة الضغط الموجه؟", a: "التورق (Foliation)"}] 
+        }, 
+        rock: { 
+            easy:   [{q: "ما اسم البرنامج المستخدم في ورشة تحليل الخرائط الجيولوجية؟", a: "ArcGis", img: ""}], 
+            medium: [{q: "من هو المشرف الأكاديمي للنادي؟", a: "دكتور احمد رضا", img: ""}], 
+            hard:   [{q: "كم عدد الفعاليات الترفيهية التي تم تنفيذها خلال العام؟", a: "13 فعالية ترفيهية", img: ""}] 
+        }, 
+        petro: [
+            {q: "انسجة ", a: "زجاجي، دقيق البلورات، خشن البلورات، بورفيري، فقاعي"},
+            {q: "صخور رسوبية", a: "-"}
+        ] 
+    },
+    4: { 
+        geo: { 
+            easy:   [{q: "ما هو هذا الصخر؟", a: "Granite"}, img: "https://www.geologypage.com/wp-content/uploads/2019/05/Granite-Rocks-GeologyPage.jpg"], 
+            medium: [{q: "ما هو نوع عدم التوافق الذي يفصل بين طبقات رسوبية أفقية تعلو صخوراً نارية أو متحولة؟", a: "عدم توافق لا متجانس (Nonconformity)"}], 
+            hard:   [{q: "ماذا كانت تسمى اول قارة عظمى على الارض؟", a: "Pangaea"}] 
+        }, 
+        rock: { 
+            easy:   [{q: "مالذي أضيف إلى الـ Students Symposium في نسخته الثالثة؟", a: "The Hackathon", img: ""}], 
+            medium: [{q: "من هم رؤساء لجنة الفعاليات والتنظيم", a: "الشيماء-ساري", img: ""}], 
+            hard:   [{q: "ما أطول اسم فعالية مذكور ضمن برامج النادي؟", a: "ورشة تحليل الخرائط الجيولوجية وصور الأقمار الصناعية", img: ""}] 
+        }, 
+        petro: [
+            {q: " اذكر أكبر عدد من المعادن الاقتصادية أو خامات المعادن؟", a: "الذهب، البيريت، الكالكوبيريت، الهيماتيت، الجالينا"},
+            {q: "اعضاء النادي؟", a: "-"}
+        ] 
+    },
+    5: { 
+        geo: { 
+            easy:   [{q: "ما هو الصخر المتحول الناتج عن تحول الحجر الجيري (Limestone)؟", a: "الرخام (Marble)"}], 
+            medium: [{q: "ما هو المعدن المعروف بلقب (ذهب المغفلين) بسبب لونه الذهبي المخادع؟", a: "البيريت (Pyrite)"}], 
+            hard:   [{q: "ما المعدن الناتج غالبًا من تحول olivine في الصخور فوق المافية؟", a: "serpentine"}] 
+        }, 
+        rock: { 
+            easy:   [{q: "3. في أي ترم أُقيمت الأمسية الرمضانية؟", a: "الثاني", img: ""}], 
+            medium: [{q: "ماهي الفقرة التي قدمتها لجنة ادارة المنصات والتوثيق في رمضان؟", a: "رمضان بعدسة جيولوجية", img: ""}], 
+            hard:   [{q: "4. رتّب الفعاليات الترفيهية حسب ظهورها في القائمة؟", a: "١-اليوم الترحيبي ٢-الاحتفال باليوم الوطني ٣-JoyZoic ٤-الأمسية الرمضانية ٥-الاحتفال بعيد الفطر", img: ""}] 
+        }, 
+        petro: [
+            {q: " اذكر أكبر عدد من الصخور البركانية (Extrusive Rocks)؟", a: "البازلت، الريوليت، الأنديزيت، الأوبسيديان، البوميس"},
+            {q: "انشطة اقامها النادي", a: "-"}
+        ] 
+    },
+    6: { 
+        geo: { 
+            easy:   [{q: " ما هو هذا المعدن ؟", a: "Barite", img: "https://media.springernature.com/w300/springer-static/image/art%3A10.1038%2Fs41561-025-01780-7/MediaObjects/41561_2025_1780_Figa_HTML.png"}], 
+            medium: [{q: "ما خام القصدير الرئيسي؟", a: "cassiterite"}], 
+            hard:   [{q: "ما الـ Facies الذي يتميز بوجود معدن glaucophane؟", a: "blueschist"}] 
+        }, 
+        rock: { 
+            easy:   [{q: "من هو رئيس النادي السابق؟", a: "منصور الطلحي", img: ""}], 
+            medium: [{q: "من هو مقدم ورشة اساسيات برنامج اكسل؟", a: "دكتور خالد رحيمي", img: ""}], 
+            hard:   [{q: "مين اكثر واحد يقتله المافيا بالأمسية الرمضانية؟", a: "منصور المالكي", img: ""}] 
+        }, 
+        petro: [
+            {q: "مناجم بالسعودية؟", a: "-"},
+            {q: "Sulfide and Oxide Minerals", a: "-"}
+        ]
+    }
+};
+
+let currentRoom = 1; let state = { t1: "", t2: "", s1: 0, s2: 0, used: {} }; let activeQ = null;
+let questionTimer = null; let currentCountdownValue = 0;
+
+const SoundEffects = {
+    ctx: null,
+    init() { if(!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); },
+    playBeep(freq, duration) {
+        this.init(); let osc = this.ctx.createOscillator(); let gain = this.ctx.createGain();
+        osc.type = 'sine'; osc.frequency.value = freq; gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
+        osc.connect(gain); gain.connect(this.ctx.destination); osc.start(); osc.stop(this.ctx.currentTime + duration);
+    },
+    tick() { this.playBeep(600, 0.08); },
+    fastTick() { this.playBeep(900, 0.05); },
+    alarm() {
+        this.init(); let now = this.ctx.currentTime;
+        let osc1 = this.ctx.createOscillator(); let osc2 = this.ctx.createOscillator(); let gain = this.ctx.createGain();
+        osc1.type = 'sawtooth'; osc1.frequency.value = 180; osc2.type = 'sawtooth'; osc2.frequency.value = 185;
+        gain.gain.setValueAtTime(0.15, now); gain.gain.exponentialRampToValueAtTime(0.01, now + 0.8);
+        osc1.connect(gain); osc2.connect(gain); gain.connect(this.ctx.destination);
+        osc1.start(); osc2.start(); osc1.stop(now + 0.8); osc2.stop(now + 0.8);
+    },
+    victory() {
+        this.init(); let now = this.ctx.currentTime;
+        let notes = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99, 1046.50];
+        notes.forEach((freq, index) => {
+            let osc = this.ctx.createOscillator(); let gain = this.ctx.createGain();
+            osc.type = 'triangle'; osc.frequency.value = freq;
+            let noteTime = now + (index * 0.12);
+            gain.gain.setValueAtTime(0.12, noteTime); gain.gain.exponentialRampToValueAtTime(0.01, noteTime + 0.4);
+            osc.connect(gain); gain.connect(this.ctx.destination);
+            osc.start(noteTime); osc.stop(noteTime + 0.4);
+        });
+    }
+};
+
+const mainRow = document.getElementById('main-rooms-list');
+const secretRow = document.getElementById('secret-room-list');
+
+for(let i=1; i<=6; i++) {
+    const btn = document.createElement('button');
+    if(i === 6) { btn.className = 'room-btn secret'; btn.innerText = '؟'; secretRow.appendChild(btn); } 
+    else { btn.className = 'room-btn'; btn.innerText = i; mainRow.appendChild(btn); }
+    btn.onclick = () => { 
+        currentRoom = i; 
+        document.getElementById('setup-title').innerHTML = (i === 6) ? "تجهيز الفقرة السرية <span class='emoji'>🕵️‍♂️</span>" : "تجهيز القائمة " + i; 
+        showScreen('screen-setup'); 
+        SoundEffects.init(); 
+    };
+}
+
+function showScreen(id) { document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById(id).classList.add('active'); }
+function initGame() { state.t1 = document.getElementById('team1-name').value || "الفريق 1"; state.t2 = document.getElementById('team2-name').value || "الفريق 2"; state.s1 = 0; state.s2 = 0; state.used = {}; renderBoard(); showScreen('screen-board'); }
+
+function renderBoard() {
+    document.getElementById('board-title').innerHTML = (currentRoom === 6) ? "الفقرة السرية <span class='emoji'>❓</span>" : "القائمة " + currentRoom;
+    document.getElementById('score1').innerHTML = `<div style="font-size:0.9rem; opacity:0.8; font-weight:600;">${state.t1}</div><div style="font-size:2rem; font-weight:900; color:var(--accent); margin-top:5px;">${state.s1}</div>`;
+    document.getElementById('score2').innerHTML = `<div style="font-size:0.9rem; opacity:0.8; font-weight:600;">${state.t2}</div><div style="font-size:2rem; font-weight:900; color:var(--accent); margin-top:5px;">${state.s1}</div>`;
+    
+    fillNormal('geo', 'geo-board'); 
+    fillNormal('rock', 'rock-board'); 
+    fillChallenge('petro', 'petro-board');
+}
+
+function fillNormal(cat, container) {
+    const div = document.getElementById(container); div.innerHTML = '';
+    ['easy', 'medium', 'hard'].forEach((lvl, lIdx) => {
+        const row = document.createElement('div'); row.innerHTML = `<span class="lvl-label">${lvl === 'easy' ? 'سهل' : lvl === 'medium' ? 'متوسط' : 'صعب'}</span>`;
+        const cards = document.createElement('div'); cards.className = 'cards-row';
+        const qList = roomsData[currentRoom][cat][lvl];
+        if (qList && qList.length > 0) {
+            const id = `${cat}-${lvl}-0`; const card = document.createElement('div'); card.className = `card ${lvl}`;
+            if(state.used[id]) { card.classList.add('used'); card.innerText = '✓'; }
+            else { card.innerText = (lIdx+1)*100; card.onclick = () => openQ(cat, lvl, 0); }
+            cards.appendChild(card);
+        }
+        row.appendChild(cards); div.appendChild(row);
+    });
+}
+
+function fillChallenge(cat, container) {
+    const div = document.getElementById(container); div.innerHTML = '';
+    const row = document.createElement('div'); row.innerHTML = `<span class="lvl-label" style="color:var(--challenge)"> ( في 15 ثانية عدد اكبر عدد من المطلوب بالسؤال)</span>`;
+    const cards = document.createElement('div'); cards.className = 'cards-row';
+    
+    const qList = roomsData[currentRoom][cat];
+    qList.forEach((q, idx) => {
+        const id = `${cat}-challenge-${idx}`; const card = document.createElement('div'); card.className = `card`;
+        card.style.background = 'linear-gradient(135deg, var(--challenge), #f50057)'; card.style.color = '#fff';
+        
+        if(state.used[id]) { card.classList.add('used'); card.innerText = '✓'; }
+        else { card.innerText = `فقرة ${idx + 1}`; card.onclick = () => openChallengeQ(cat, idx); }
+        cards.appendChild(card);
+    });
+    row.appendChild(cards); div.appendChild(row);
+}
+
+function openQ(cat, lvl, idx) {
+    clearInterval(questionTimer);
+    activeQ = { cat, lvl, idx, id: `${cat}-${lvl}-${idx}`, type: 'normal' }; 
+    const q = roomsData[currentRoom][cat][lvl][idx];
+    setupQuestionScreen(q, cat, lvl);
+}
+
+function openChallengeQ(cat, idx) {
+    clearInterval(questionTimer);
+    activeQ = { cat, idx, id: `${cat}-challenge-${idx}`, type: 'challenge' };
+    const q = roomsData[currentRoom][cat][idx];
+    setupQuestionScreen(q, cat, 'challenge');
+}
+
+function setupQuestionScreen(q, cat, lvlOrType) {
+    document.getElementById('q-text').innerText = q.q; document.getElementById('q-answer').innerText = q.a;
+    document.getElementById('q-answer').style.display = 'none'; const img = document.getElementById('q-img');
+    if(q.img && q.img !== "") { img.src = q.img; img.style.display = 'block'; } else { img.style.display = 'none'; }
+    
+    const displayElement = document.getElementById('q-timer-display');
+    displayElement.classList.remove('danger');
+    
+    if(activeQ.type === 'challenge') {
+        currentCountdownValue = 15;
+    } else {
+        if(lvlOrType === 'easy') currentCountdownValue = 5;
+        else if(lvlOrType === 'medium') currentCountdownValue = 10;
+        else if(lvlOrType === 'hard') currentCountdownValue = 15;
+    }
+    
+    displayElement.innerHTML = currentCountdownValue + " ثوانٍ";
+    const timerBtn = document.getElementById('q-timer-btn');
+    timerBtn.disabled = false; timerBtn.style.background = "rgba(255,255,255,0.08)";
+    timerBtn.innerHTML = "تشغيل المؤقت <span class='emoji'>⏱️</span>";
+
+    document.getElementById('winner-btns').innerHTML = `
+        <button class="btn-action btn-team-choice" onclick="add(1)">${state.t1}</button>
+        <button class="btn-action btn-team-choice" onclick="add(2)">${state.t2}</button>
+        <button class="btn-action" style="background: rgba(255,255,255,0.08); border:1px solid var(--glass-border); color:#cbd5e1" onclick="add(0)">محد جاوب</button>`;
+    showScreen('screen-question');
+}
+
+function startQuestionTimer() {
+    const timerBtn = document.getElementById('q-timer-btn'); const displayElement = document.getElementById('q-timer-display');
+    timerBtn.disabled = true; timerBtn.style.background = "rgba(0,0,0,0.3)"; timerBtn.style.borderColor = "transparent";
+    timerBtn.innerText = "المؤقت يعمل..."; SoundEffects.tick();
+
+    questionTimer = setInterval(() => {
+        currentCountdownValue--;
+        if(currentCountdownValue <= 0) {
+            clearInterval(questionTimer); displayElement.innerHTML = "انتهى الوقت! <span class='emoji'>🚨</span>";
+            displayElement.classList.add('danger'); SoundEffects.alarm();
+            if(window.navigator.vibrate) window.navigator.vibrate(300);
+        } else {
+            displayElement.innerHTML = currentCountdownValue + " ثوانٍ";
+            if (currentCountdownValue <= 3) {
+                displayElement.classList.add('danger'); SoundEffects.fastTick();
+                setTimeout(() => { if(currentCountdownValue > 0) SoundEffects.fastTick(); }, 500);
+            } else { SoundEffects.tick(); }
+        }
+    }, 1000);
+}
+
+function goBackToBoard() { clearInterval(questionTimer); showScreen('screen-board'); }
+
+function add(w) {
+    clearInterval(questionTimer);
+    let p = 200; 
+    if(activeQ.type === 'normal') {
+        p = activeQ.lvl === 'easy' ? 100 : activeQ.lvl === 'medium' ? 200 : 300;
+    }
+    if(w === 1) state.s1 += p; else if(w === 2) state.s2 += p;
+    state.used[activeQ.id] = true; renderBoard(); showScreen('screen-board');
+}
+
+function endGame() {
+    clearInterval(questionTimer);
+    let msg = state.s1 > state.s2 ? `<span class='emoji'>🏆</span> الفائز: ${state.t1}` : state.s2 > state.s1 ? `<span class='emoji'>🏆</span> الفائز: ${state.t2}` : "<span class='emoji'>🤝</span> تعادل!";
+    document.getElementById('winner-msg').innerHTML = msg;
+    document.getElementById('final-points').innerHTML = `${state.t1}: <span style="color:var(--accent)">${state.s1} نقطة</span> <br> ${state.t2}: <span style="color:var(--accent)">${state.s2} نقطة</span>`;
+    showScreen('screen-result'); SoundEffects.victory();
+}
+</script>
+</body>
+</html>
